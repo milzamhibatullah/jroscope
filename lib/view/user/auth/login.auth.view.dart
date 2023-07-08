@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jroscope/config/app.images.config.dart';
 import 'package:jroscope/view/theme/style/custom.text.style.dart';
 import 'package:jroscope/view/theme/style/custom.textfield.style.dart';
+import 'package:jroscope/view/theme/widget/gold.overlay.widget.dart';
+import 'package:jroscope/view/user/shared/auth.shared.button.dart';
 
 class LoginAuthView extends StatelessWidget {
   @override
@@ -54,23 +55,13 @@ class LoginAuthView extends StatelessWidget {
                     style: customTextStyle(color: Colors.white),
                     decoration: customTextFieldStyle(
                       hintText: 'Enter Password',
-                      suffix: ShaderMask(
-                        shaderCallback: (Rect bounds) {
-                          return const RadialGradient(
-                            colors: [
-                              Color(0xFF94783E),
-                              Color(0xFFF3EDA6),
-                              Color(0xFFF8FAE5),
-                              Color(0xFFF8FAE5),
-                              Color(0xFFD5BE88),
-                              Color(0xFFF8FAE5),
-                              Color(0xFFD5BE88),
-                            ],
-                          ).createShader(bounds);
-                        },
-                        child: const Icon(
-                          Icons.visibility_off_outlined,
-                          color: Colors.white,
+                      suffix: GoldOverlayWidget(
+                        widget: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.visibility_off_outlined,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -83,25 +74,7 @@ class LoginAuthView extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 24.r, vertical: 16.r),
                   child: GestureDetector(
                     onTap: () {},
-                    child: Container(
-                      height: 45.r,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(9.r),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black,
-                            offset: Offset(0.0, 0.0),
-                            blurRadius: 0,
-                          ),
-                        ],
-                        gradient: LinearGradient(
-                          colors: [
-                            const Color(0xFF62CDCB).withOpacity(.5),
-                            const Color(0xFF4599DB).withOpacity(.5),
-                          ],
-                        ),
-                      ),
+                    child: AuthSharedButton(
                       child: Center(
                         child: Text(
                           'Login',
@@ -128,25 +101,12 @@ class LoginAuthView extends StatelessWidget {
                         'No Account? ',
                         style: customTextStyle(color: Colors.white),
                       ),
-                      ShaderMask(
-                        shaderCallback: (Rect bounds) {
-                          return const RadialGradient(
-                            colors: [
-                              Color(0xFF94783E),
-                              Color(0xFFF3EDA6),
-                              Color(0xFFF8FAE5),
-                              Color(0xFFF8FAE5),
-                              Color(0xFFD5BE88),
-                              Color(0xFFF8FAE5),
-                              Color(0xFFD5BE88),
-                            ],
-                          ).createShader(bounds);
-                        },
-                        child: Text(
+                      GoldOverlayWidget(
+                        widget: Text(
                           'Register here',
                           style: customTextStyle(color: Colors.white),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 )

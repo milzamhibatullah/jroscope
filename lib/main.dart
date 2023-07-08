@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:jroscope/router.config.dart';
+import 'package:jroscope/config/router.config.dart';
 
 void main() {
   runApp(App());

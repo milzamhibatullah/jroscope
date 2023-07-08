@@ -22,7 +22,7 @@ final GoRouter routeConfig = GoRouter(
         routes: <RouteBase>[
           /// routes for register
           GoRoute(
-            path: '/register',
+            path: 'register',
             builder: (BuildContext context, GoRouterState state) =>
                 RegisterAuthView(),
           )

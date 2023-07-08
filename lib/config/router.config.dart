@@ -13,19 +13,28 @@ final GoRouter routeConfig = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return SplashView();
       },
+      redirect: (context, state) {
+        bool isLoggedIn = false;
+        if (isLoggedIn) {
+          return null;
+        } else {
+          return '/auth';
+        }
+      },
     ),
 
     /// set initial auth view to login screen
     GoRoute(
-        path: '/auth',
-        builder: (BuildContext context, GoRouterState state) => LoginAuthView(),
-        routes: <RouteBase>[
-          /// routes for register
-          GoRoute(
-            path: 'register',
-            builder: (BuildContext context, GoRouterState state) =>
-                RegisterAuthView(),
-          )
-        ]),
+      path: '/auth',
+      builder: (BuildContext context, GoRouterState state) => LoginAuthView(),
+      routes: <RouteBase>[
+        /// routes for register
+        GoRoute(
+          path: 'register',
+          builder: (BuildContext context, GoRouterState state) =>
+              RegisterAuthView(),
+        )
+      ],
+    ),
   ],
 );

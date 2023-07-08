@@ -5,7 +5,7 @@ import 'package:jroscope/view/user/auth/login.auth.view.dart';
 import 'package:jroscope/view/user/auth/register.auth.view.dart';
 
 /// The route configuration.
-final GoRouter _router = GoRouter(
+final GoRouter routeConfig = GoRouter(
   routes: <RouteBase>[
     /// set initial to splash screen
     GoRoute(

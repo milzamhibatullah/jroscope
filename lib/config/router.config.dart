@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jroscope/view/splash/splash.view.dart';
 import 'package:jroscope/view/user/auth/login.auth.view.dart';
 import 'package:jroscope/view/user/auth/register.auth.view.dart';
+import 'package:jroscope/view/user/profile/profile.user.view.dart';
 
 /// The route configuration.
 final GoRouter routeConfig = GoRouter(
@@ -11,10 +11,10 @@ final GoRouter routeConfig = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return SplashView();
+        return ProfileUserView();
       },
       redirect: (context, state) {
-        bool isLoggedIn = false;
+        bool isLoggedIn = true;
         if (isLoggedIn) {
           return null;
         } else {

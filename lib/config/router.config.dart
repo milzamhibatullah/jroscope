@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jroscope/view/user/auth/login.auth.view.dart';
 import 'package:jroscope/view/user/auth/register.auth.view.dart';
+import 'package:jroscope/view/user/profile/interest/edit.interest.view.dart';
 import 'package:jroscope/view/user/profile/profile.user.view.dart';
 
 /// The route configuration.
@@ -13,6 +14,13 @@ final GoRouter routeConfig = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return ProfileUserView();
       },
+      routes: <RouteBase>[
+        GoRoute(
+          path: 'interest/edit',
+          builder: (BuildContext context, GoRouterState state) =>
+              EditInterestView(),
+        ),
+      ],
       redirect: (context, state) {
         bool isLoggedIn = true;
         if (isLoggedIn) {

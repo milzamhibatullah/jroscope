@@ -74,7 +74,9 @@ class LoginAuthView extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.r, vertical: 16.r),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      context.go('/');
+                    },
                     child: AuthSharedButton(
                       child: Center(
                         child: Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../config/app.images.config.dart';
 import '../../../theme/base.theme.dart';
@@ -37,7 +38,9 @@ class InterestProfileView extends StatelessWidget {
                     ),
                     const Spacer(),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.go('/interest/edit');
+                      },
                       icon: Image.asset(
                         AppImages.editIcon,
                         height: 16.r,

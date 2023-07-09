@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../config/app.images.config.dart';
 import '../../theme/style/custom.text.style.dart';
 import '../../theme/style/custom.textfield.style.dart';
+import '../../theme/widget/custom.back.button.dart';
 import '../../theme/widget/gold.overlay.widget.dart';
 import '../shared/auth.shared.button.dart';
 
@@ -24,20 +25,7 @@ class RegisterAuthView extends StatelessWidget {
             automaticallyImplyLeading: false,
             elevation: 0.0,
             centerTitle: false,
-            title: TextButton.icon(
-              onPressed: () {
-                context.pop();
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-              ),
-              label: Text(
-                'Back',
-                style: customTextStyle(
-                    color: Colors.white, size: 14.0, weight: FontWeight.w700),
-              ),
-            ),
+            title: CustomBackButton(),
           ),
           body: SafeArea(
             child: SingleChildScrollView(

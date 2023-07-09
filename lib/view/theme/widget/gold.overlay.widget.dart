@@ -7,7 +7,9 @@ class GoldOverlayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ShaderMask(
       shaderCallback: (Rect bounds) {
-        return const RadialGradient(
+        return const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
           colors: [
             Color(0xFF94783E),
             Color(0xFFF3EDA6),

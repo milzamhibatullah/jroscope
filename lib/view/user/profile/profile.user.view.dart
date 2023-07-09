@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jroscope/config/app.images.config.dart';
 import 'package:jroscope/view/theme/style/custom.text.style.dart';
+import 'package:jroscope/view/theme/style/custom.textfield.style.dart';
+import 'package:jroscope/view/theme/widget/gold.overlay.widget.dart';
+import 'package:jroscope/view/user/profile/component/form.about.component.dart';
 
 import '../../theme/base.theme.dart';
 
@@ -66,7 +69,6 @@ class ProfileUserView extends StatelessWidget {
               ///about section
               SizedBox(
                 width: double.infinity,
-                height: 120.r,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 8.r,
@@ -95,20 +97,30 @@ class ProfileUserView extends StatelessWidget {
                                 ),
                               ),
                               const Spacer(),
-                              IconButton(
-                                onPressed: () {},
-                                icon: Image.asset(
-                                  AppImages.editIcon,
-                                  height: 16.r,
-                                ),
-                              )
+                              // IconButton(
+                              //   onPressed: () {},
+                              //   icon: Image.asset(
+                              //     AppImages.editIcon,
+                              //     height: 16.r,
+                              //   ),
+                              // )
+                              TextButton(
+                                  onPressed: () {},
+                                  child: GoldOverlayWidget(
+                                    widget: Text(
+                                      'Save & Update',
+                                      style:
+                                          customTextStyle(color: Colors.white),
+                                    ),
+                                  ))
                             ],
                           ),
                           SizedBox(
                             height: 8.r,
                           ),
-                          _defaultSectionContent(
-                              'Add in your profile to help others know you better'),
+                          // _defaultSectionContent(
+                          //     'Add in your profile to help others know you better'),
+                          FormAboutComponent(),
                         ],
                       ),
                     ),

@@ -3,11 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'custom.text.style.dart';
 
-InputDecoration customTextFieldStyle({String hintText = '', Widget? suffix}) =>
+InputDecoration customTextFieldStyle(
+        {String hintText = '',
+        Widget? suffix,
+        bool isDense = false,
+        TextDirection direction = TextDirection.ltr,
+        double contentPadding = 16.0}) =>
     InputDecoration(
       hintText: hintText,
       filled: true,
+      isDense: isDense,
+      contentPadding: EdgeInsets.all(contentPadding.r),
       suffixIcon: suffix,
+      hintTextDirection: direction,
       hintStyle: customTextStyle(
           color: Colors.white.withOpacity(.4),
           weight: FontWeight.w500,

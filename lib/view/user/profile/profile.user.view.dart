@@ -107,11 +107,8 @@ class ProfileUserView extends StatelessWidget {
                           SizedBox(
                             height: 8.r,
                           ),
-                          Text(
-                            'Add in your profile to help others know you better',
-                            style: customTextStyle(
-                                color: Colors.white.withOpacity(.52)),
-                          )
+                          _defaultSectionContent(
+                              'Add in your profile to help others know you better'),
                         ],
                       ),
                     ),
@@ -119,7 +116,7 @@ class ProfileUserView extends StatelessWidget {
                 ),
               ),
 
-              ///interset section
+              ///interest section
               SizedBox(
                 width: double.infinity,
                 height: 120.r,
@@ -161,11 +158,8 @@ class ProfileUserView extends StatelessWidget {
                           SizedBox(
                             height: 8.r,
                           ),
-                          Text(
-                            'Add in your interest to find a better match',
-                            style: customTextStyle(
-                                color: Colors.white.withOpacity(.52)),
-                          )
+                          _defaultSectionContent(
+                              'Add in your interest to find a better match'),
                         ],
                       ),
                     ),
@@ -178,4 +172,10 @@ class ProfileUserView extends StatelessWidget {
       ),
     );
   }
+
+  ///set widget for default content
+  Widget _defaultSectionContent(text) => Text(
+        text,
+        style: customTextStyle(color: Colors.white.withOpacity(.52)),
+      );
 }

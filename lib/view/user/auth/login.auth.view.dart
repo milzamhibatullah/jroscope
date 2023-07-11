@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jroscope/config/app.images.config.dart';
 import 'package:jroscope/view/theme/style/custom.text.style.dart';
 import 'package:jroscope/view/theme/style/custom.textfield.style.dart';
 import 'package:jroscope/view/theme/widget/gold.overlay.widget.dart';
+import 'package:jroscope/view/theme/widget/snackbar.widget.dart';
 import 'package:jroscope/view/user/shared/auth.shared.button.dart';
 
 class LoginAuthView extends StatefulWidget {
@@ -20,7 +20,7 @@ class LoginAuthView extends StatefulWidget {
 class _LoginAuthView extends State<LoginAuthView> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool _obsecureText = true;
+  bool _obscureText = true;
   bool _isEnabled = false;
 
   @override
@@ -92,7 +92,7 @@ class _LoginAuthView extends State<LoginAuthView> {
                   child: TextField(
                     controller: passwordController,
                     key: const Key('passwordTextFieldKey'),
-                    obscureText: _obsecureText,
+                    obscureText: _obscureText,
                     style: customTextStyle(color: Colors.white),
                     decoration: customTextFieldStyle(
                       hintText: 'Enter Password',
@@ -100,11 +100,11 @@ class _LoginAuthView extends State<LoginAuthView> {
                         widget: IconButton(
                           onPressed: () {
                             setState(() {
-                              _obsecureText = _obsecureText ? false : true;
+                              _obscureText = _obscureText ? false : true;
                             });
                           },
                           icon: Icon(
-                            _obsecureText
+                            _obscureText
                                 ? Icons.visibility_off_outlined
                                 : Icons.visibility_rounded,
                             color: Colors.white,
@@ -122,12 +122,13 @@ class _LoginAuthView extends State<LoginAuthView> {
                   child: GestureDetector(
                     key: const Key('signInButtonKey'),
                     onTap: () {
-                      // context.go('/');
-                      // print('clicked');
-                      // final snackBar = SnackBar(
-                      //   content: Text('Invalid email and password'),
-                      //   duration: Duration(seconds: 5),
-                      // );
+                      if (emailController.text.isEmpty ||
+                          passwordController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          snackBarWidget(
+                              'Username and Password cant be empty', 2),
+                        );
+                      }
 
                       // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },

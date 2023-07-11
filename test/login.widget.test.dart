@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jroscope/config/router.config.dart';
 import 'package:jroscope/view/user/auth/login.auth.view.dart';
 

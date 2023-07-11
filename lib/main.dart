@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jroscope/bloc/user/auth/login/login.bloc.dart';
 import 'package:jroscope/config/router.config.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(App());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<LoginBloc>(
+          create: (context) => LoginBloc(),
+        ),
+      ],
+      child: App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {

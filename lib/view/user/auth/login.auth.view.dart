@@ -9,6 +9,8 @@ import 'package:jroscope/view/theme/widget/gold.overlay.widget.dart';
 import 'package:jroscope/view/user/shared/auth.shared.button.dart';
 
 class LoginAuthView extends StatefulWidget {
+  const LoginAuthView({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _LoginAuthView();
@@ -18,7 +20,29 @@ class LoginAuthView extends StatefulWidget {
 class _LoginAuthView extends State<LoginAuthView> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool _obsecureText = true;
+  bool _isEnabled = false;
 
+  @override
+  void initState() {
+    emailController.addListener(_handleTextController);
+    passwordController.addListener(_handleTextController);
+    super.initState();
+  }
+
+  _handleTextController() {
+    print(emailController.text);
+    print(passwordController.text);
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      setState(() {
+        _isEnabled = true;
+      });
+    } else {
+      setState(() {
+        _isEnabled = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +79,7 @@ class _LoginAuthView extends State<LoginAuthView> {
                       EdgeInsets.symmetric(horizontal: 24.r, vertical: 16.r),
                   child: TextField(
                     controller: emailController,
-                    key: Key('emailTextFieldKey'),
+                    key: const Key('emailTextFieldKey'),
                     style: customTextStyle(color: Colors.white),
                     decoration:
                         customTextFieldStyle(hintText: 'Enter Username/Email'),
@@ -68,15 +92,21 @@ class _LoginAuthView extends State<LoginAuthView> {
                   child: TextField(
                     controller: passwordController,
                     key: const Key('passwordTextFieldKey'),
-                    obscureText: true,
+                    obscureText: _obsecureText,
                     style: customTextStyle(color: Colors.white),
                     decoration: customTextFieldStyle(
                       hintText: 'Enter Password',
                       suffix: GoldOverlayWidget(
                         widget: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.visibility_off_outlined,
+                          onPressed: () {
+                            setState(() {
+                              _obsecureText = _obsecureText ? false : true;
+                            });
+                          },
+                          icon: Icon(
+                            _obsecureText
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_rounded,
                             color: Colors.white,
                           ),
                         ),
@@ -93,15 +123,16 @@ class _LoginAuthView extends State<LoginAuthView> {
                     key: const Key('signInButtonKey'),
                     onTap: () {
                       // context.go('/');
-                      print('clicked');
-                    final snackBar = SnackBar(
-                      content:Text('Invalid email and password') ,
-                      duration: Duration(seconds: 5),
-                    );
+                      // print('clicked');
+                      // final snackBar = SnackBar(
+                      //   content: Text('Invalid email and password'),
+                      //   duration: Duration(seconds: 5),
+                      // );
 
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     child: AuthSharedButton(
+                      changedState: _isEnabled,
                       child: Center(
                         child: Text(
                           'Login',

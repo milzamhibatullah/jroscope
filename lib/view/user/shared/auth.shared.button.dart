@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AuthSharedButton extends StatelessWidget {
   final Widget child;
-  const AuthSharedButton({Key? key, required this.child}) : super(key: key);
+  final bool changedState;
+  const AuthSharedButton({Key? key, required this.child, required this.changedState}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,17 +12,17 @@ class AuthSharedButton extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(9.r),
-        boxShadow: const [
+        boxShadow:  [
           BoxShadow(
-            color: Colors.black,
-            offset: Offset(0.0, 0.0),
-            blurRadius: 0,
+            color: changedState?Colors.white:Colors.black,
+            offset: const Offset(0.0, 0.0),
+            blurRadius:changedState?25: 0,
           ),
         ],
         gradient: LinearGradient(
           colors: [
-            const Color(0xFF62CDCB).withOpacity(.5),
-            const Color(0xFF4599DB).withOpacity(.5),
+            const Color(0xFF62CDCB).withOpacity(changedState?1:.5),
+            const Color(0xFF4599DB).withOpacity(changedState?1:.5),
           ],
         ),
       ),

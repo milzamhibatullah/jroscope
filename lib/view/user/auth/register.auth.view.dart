@@ -9,7 +9,14 @@ import '../../theme/widget/custom.back.button.dart';
 import '../../theme/widget/gold.overlay.widget.dart';
 import '../shared/auth.shared.button.dart';
 
-class RegisterAuthView extends StatelessWidget {
+class RegisterAuthView extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    return _RegisterAuthView();
+  }
+}
+class _RegisterAuthView extends State<RegisterAuthView> {
+  bool _isEnabled = false;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -117,6 +124,7 @@ class RegisterAuthView extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {},
                       child: AuthSharedButton(
+                        changedState: _isEnabled,
                         child: Center(
                           child: Text(
                             'Register',

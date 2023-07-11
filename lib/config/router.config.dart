@@ -22,7 +22,7 @@ final GoRouter routeConfig = GoRouter(
         ),
       ],
       redirect: (context, state) {
-        bool isLoggedIn = true;
+        bool isLoggedIn = false;
         if (isLoggedIn) {
           return null;
         } else {

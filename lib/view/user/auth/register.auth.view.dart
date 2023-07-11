@@ -13,6 +13,7 @@ class RegisterAuthView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      key: const Key('registerStackWidgetKey'),
       children: [
         Image.asset(
           AppImages.background,

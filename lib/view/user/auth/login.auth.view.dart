@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jroscope/config/app.images.config.dart';
 import 'package:jroscope/view/theme/style/custom.text.style.dart';
@@ -7,7 +8,18 @@ import 'package:jroscope/view/theme/style/custom.textfield.style.dart';
 import 'package:jroscope/view/theme/widget/gold.overlay.widget.dart';
 import 'package:jroscope/view/user/shared/auth.shared.button.dart';
 
-class LoginAuthView extends StatelessWidget {
+class LoginAuthView extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _LoginAuthView();
+  }
+}
+
+class _LoginAuthView extends State<LoginAuthView> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -42,6 +54,8 @@ class LoginAuthView extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.r, vertical: 16.r),
                   child: TextField(
+                    controller: emailController,
+                    key: Key('emailTextFieldKey'),
                     style: customTextStyle(color: Colors.white),
                     decoration:
                         customTextFieldStyle(hintText: 'Enter Username/Email'),
@@ -52,6 +66,8 @@ class LoginAuthView extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.r),
                   child: TextField(
+                    controller: passwordController,
+                    key: const Key('passwordTextFieldKey'),
                     obscureText: true,
                     style: customTextStyle(color: Colors.white),
                     decoration: customTextFieldStyle(
@@ -74,8 +90,16 @@ class LoginAuthView extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.r, vertical: 16.r),
                   child: GestureDetector(
+                    key: const Key('signInButtonKey'),
                     onTap: () {
-                      context.go('/');
+                      // context.go('/');
+                      print('clicked');
+                    final snackBar = SnackBar(
+                      content:Text('Invalid email and password') ,
+                      duration: Duration(seconds: 5),
+                    );
+
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     child: AuthSharedButton(
                       child: Center(
@@ -106,6 +130,7 @@ class LoginAuthView extends StatelessWidget {
                       ),
                       GoldOverlayWidget(
                         widget: TextButton(
+                            key: const Key('registerButtonKey'),
                             onPressed: () {
                               context.go('/auth/register');
                             },

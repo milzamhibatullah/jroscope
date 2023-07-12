@@ -23,10 +23,6 @@ class LoginAuthView extends StatelessWidget {
         ),
         BlocBuilder<LoginBloc, LoginState>(
           builder: (context, state) {
-            if (state.isSuccess) {
-              context.go('/');
-            }
-
             return Scaffold(
               backgroundColor: Colors.transparent,
               body: SafeArea(
@@ -169,6 +165,14 @@ class LoginAuthView extends StatelessWidget {
                 ),
               ),
             );
+          },
+          buildWhen: (previous, current) {
+            if (current.isSuccess) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(snackBarWidget('Successfully Login', 2));
+              context.go('/');
+            }
+            return true;
           },
         ),
       ],

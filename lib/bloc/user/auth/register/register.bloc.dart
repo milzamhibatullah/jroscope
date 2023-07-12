@@ -10,7 +10,7 @@ part 'register.bloc.freezed.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final _service = UserService();
-  RegisterBloc() : super(_RegisterState()) {
+  RegisterBloc() : super(const _RegisterState()) {
     ///event change email
     on<_EmailChange>(
       (event, emit) => emit(

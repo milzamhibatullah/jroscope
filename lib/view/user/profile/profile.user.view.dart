@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:jroscope/service/local/local.storage.service.dart';
 import 'package:jroscope/view/theme/style/custom.text.style.dart';
 import '../../theme/base.theme.dart';
 import 'about/about.profile.view.dart';
 import 'interest/interest.profile.view.dart';
+
+enum VertMenuItem { logout }
 
 class ProfileUserView extends StatelessWidget {
   @override
@@ -20,9 +24,25 @@ class ProfileUserView extends StatelessWidget {
               color: Colors.white, size: 16.0, weight: FontWeight.w700),
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.more_horiz_rounded),
+          PopupMenuButton<VertMenuItem>(
+            icon: const Icon(
+              Icons.more_horiz_rounded,
+              color: Colors.white,
+            ),
+            onSelected: (item) {
+              if (item == VertMenuItem.logout) {
+                LocalStorageService.instance.deleteAll();
+                context.go('/auth');
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                  value: VertMenuItem.logout,
+                  child: Text(
+                    'Logout',
+                    style: customTextStyle(),
+                  ))
+            ],
           )
         ],
       ),

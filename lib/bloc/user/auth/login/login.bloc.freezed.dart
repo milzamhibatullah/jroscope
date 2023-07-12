@@ -23,7 +23,7 @@ mixin _$LoginEvent {
     required TResult Function(String password) passwordChange,
     required TResult Function() passwordVisibility,
     required TResult Function() logout,
-    required TResult Function() login,
+    required TResult Function(dynamic email, dynamic password) login,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,7 +33,7 @@ mixin _$LoginEvent {
     TResult? Function(String password)? passwordChange,
     TResult? Function()? passwordVisibility,
     TResult? Function()? logout,
-    TResult? Function()? login,
+    TResult? Function(dynamic email, dynamic password)? login,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,7 +43,7 @@ mixin _$LoginEvent {
     TResult Function(String password)? passwordChange,
     TResult Function()? passwordVisibility,
     TResult Function()? logout,
-    TResult Function()? login,
+    TResult Function(dynamic email, dynamic password)? login,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,7 +140,7 @@ class _$_Started implements _Started {
     required TResult Function(String password) passwordChange,
     required TResult Function() passwordVisibility,
     required TResult Function() logout,
-    required TResult Function() login,
+    required TResult Function(dynamic email, dynamic password) login,
   }) {
     return started();
   }
@@ -153,7 +153,7 @@ class _$_Started implements _Started {
     TResult? Function(String password)? passwordChange,
     TResult? Function()? passwordVisibility,
     TResult? Function()? logout,
-    TResult? Function()? login,
+    TResult? Function(dynamic email, dynamic password)? login,
   }) {
     return started?.call();
   }
@@ -166,7 +166,7 @@ class _$_Started implements _Started {
     TResult Function(String password)? passwordChange,
     TResult Function()? passwordVisibility,
     TResult Function()? logout,
-    TResult Function()? login,
+    TResult Function(dynamic email, dynamic password)? login,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -292,7 +292,7 @@ class _$_EmailChange implements _EmailChange {
     required TResult Function(String password) passwordChange,
     required TResult Function() passwordVisibility,
     required TResult Function() logout,
-    required TResult Function() login,
+    required TResult Function(dynamic email, dynamic password) login,
   }) {
     return emailChange(email);
   }
@@ -305,7 +305,7 @@ class _$_EmailChange implements _EmailChange {
     TResult? Function(String password)? passwordChange,
     TResult? Function()? passwordVisibility,
     TResult? Function()? logout,
-    TResult? Function()? login,
+    TResult? Function(dynamic email, dynamic password)? login,
   }) {
     return emailChange?.call(email);
   }
@@ -318,7 +318,7 @@ class _$_EmailChange implements _EmailChange {
     TResult Function(String password)? passwordChange,
     TResult Function()? passwordVisibility,
     TResult Function()? logout,
-    TResult Function()? login,
+    TResult Function(dynamic email, dynamic password)? login,
     required TResult orElse(),
   }) {
     if (emailChange != null) {
@@ -450,7 +450,7 @@ class _$_PasswordChange implements _PasswordChange {
     required TResult Function(String password) passwordChange,
     required TResult Function() passwordVisibility,
     required TResult Function() logout,
-    required TResult Function() login,
+    required TResult Function(dynamic email, dynamic password) login,
   }) {
     return passwordChange(password);
   }
@@ -463,7 +463,7 @@ class _$_PasswordChange implements _PasswordChange {
     TResult? Function(String password)? passwordChange,
     TResult? Function()? passwordVisibility,
     TResult? Function()? logout,
-    TResult? Function()? login,
+    TResult? Function(dynamic email, dynamic password)? login,
   }) {
     return passwordChange?.call(password);
   }
@@ -476,7 +476,7 @@ class _$_PasswordChange implements _PasswordChange {
     TResult Function(String password)? passwordChange,
     TResult Function()? passwordVisibility,
     TResult Function()? logout,
-    TResult Function()? login,
+    TResult Function(dynamic email, dynamic password)? login,
     required TResult orElse(),
   }) {
     if (passwordChange != null) {
@@ -581,7 +581,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
     required TResult Function(String password) passwordChange,
     required TResult Function() passwordVisibility,
     required TResult Function() logout,
-    required TResult Function() login,
+    required TResult Function(dynamic email, dynamic password) login,
   }) {
     return passwordVisibility();
   }
@@ -594,7 +594,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
     TResult? Function(String password)? passwordChange,
     TResult? Function()? passwordVisibility,
     TResult? Function()? logout,
-    TResult? Function()? login,
+    TResult? Function(dynamic email, dynamic password)? login,
   }) {
     return passwordVisibility?.call();
   }
@@ -607,7 +607,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
     TResult Function(String password)? passwordChange,
     TResult Function()? passwordVisibility,
     TResult Function()? logout,
-    TResult Function()? login,
+    TResult Function(dynamic email, dynamic password)? login,
     required TResult orElse(),
   }) {
     if (passwordVisibility != null) {
@@ -705,7 +705,7 @@ class _$_Logout implements _Logout {
     required TResult Function(String password) passwordChange,
     required TResult Function() passwordVisibility,
     required TResult Function() logout,
-    required TResult Function() login,
+    required TResult Function(dynamic email, dynamic password) login,
   }) {
     return logout();
   }
@@ -718,7 +718,7 @@ class _$_Logout implements _Logout {
     TResult? Function(String password)? passwordChange,
     TResult? Function()? passwordVisibility,
     TResult? Function()? logout,
-    TResult? Function()? login,
+    TResult? Function(dynamic email, dynamic password)? login,
   }) {
     return logout?.call();
   }
@@ -731,7 +731,7 @@ class _$_Logout implements _Logout {
     TResult Function(String password)? passwordChange,
     TResult Function()? passwordVisibility,
     TResult Function()? logout,
-    TResult Function()? login,
+    TResult Function(dynamic email, dynamic password)? login,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -792,6 +792,8 @@ abstract class _Logout implements LoginEvent {
 abstract class _$$_LoginCopyWith<$Res> {
   factory _$$_LoginCopyWith(_$_Login value, $Res Function(_$_Login) then) =
       __$$_LoginCopyWithImpl<$Res>;
+  @useResult
+  $Res call({dynamic email, dynamic password});
 }
 
 /// @nodoc
@@ -800,26 +802,55 @@ class __$$_LoginCopyWithImpl<$Res>
     implements _$$_LoginCopyWith<$Res> {
   __$$_LoginCopyWithImpl(_$_Login _value, $Res Function(_$_Login) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = freezed,
+    Object? password = freezed,
+  }) {
+    return _then(_$_Login(
+      freezed == email ? _value.email! : email,
+      freezed == password ? _value.password! : password,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Login implements _Login {
-  const _$_Login();
+  const _$_Login(this.email, this.password);
+
+  @override
+  final dynamic email;
+  @override
+  final dynamic password;
 
   @override
   String toString() {
-    return 'LoginEvent.login()';
+    return 'LoginEvent.login(email: $email, password: $password)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Login);
+        (other.runtimeType == runtimeType &&
+            other is _$_Login &&
+            const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.password, password));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(password));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoginCopyWith<_$_Login> get copyWith =>
+      __$$_LoginCopyWithImpl<_$_Login>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -829,9 +860,9 @@ class _$_Login implements _Login {
     required TResult Function(String password) passwordChange,
     required TResult Function() passwordVisibility,
     required TResult Function() logout,
-    required TResult Function() login,
+    required TResult Function(dynamic email, dynamic password) login,
   }) {
-    return login();
+    return login(email, password);
   }
 
   @override
@@ -842,9 +873,9 @@ class _$_Login implements _Login {
     TResult? Function(String password)? passwordChange,
     TResult? Function()? passwordVisibility,
     TResult? Function()? logout,
-    TResult? Function()? login,
+    TResult? Function(dynamic email, dynamic password)? login,
   }) {
-    return login?.call();
+    return login?.call(email, password);
   }
 
   @override
@@ -855,11 +886,11 @@ class _$_Login implements _Login {
     TResult Function(String password)? passwordChange,
     TResult Function()? passwordVisibility,
     TResult Function()? logout,
-    TResult Function()? login,
+    TResult Function(dynamic email, dynamic password)? login,
     required TResult orElse(),
   }) {
     if (login != null) {
-      return login();
+      return login(email, password);
     }
     return orElse();
   }
@@ -909,61 +940,26 @@ class _$_Login implements _Login {
 }
 
 abstract class _Login implements LoginEvent {
-  const factory _Login() = _$_Login;
+  const factory _Login(final dynamic email, final dynamic password) = _$_Login;
+
+  dynamic get email;
+  dynamic get password;
+  @JsonKey(ignore: true)
+  _$$_LoginCopyWith<_$_Login> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$LoginState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(bool visibilty, String password, String email) $default, {
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(bool visibilty, String password, String email)?
-        $default, {
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool visibilty, String password, String email)? $default, {
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? failed,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_LoginState value) $default, {
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failed value) failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_LoginState value)? $default, {
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Failed value)? failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_LoginState value)? $default, {
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) =>
+  bool get visibilty => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  bool get isFailed => throw _privateConstructorUsedError;
+  bool get isSuccess => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $LoginStateCopyWith<LoginState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -972,6 +968,14 @@ abstract class $LoginStateCopyWith<$Res> {
   factory $LoginStateCopyWith(
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
+  @useResult
+  $Res call(
+      {bool visibilty,
+      String password,
+      String email,
+      bool isLoading,
+      bool isFailed,
+      bool isSuccess});
 }
 
 /// @nodoc
@@ -983,356 +987,61 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? visibilty = null,
+    Object? password = null,
+    Object? email = null,
+    Object? isLoading = null,
+    Object? isFailed = null,
+    Object? isSuccess = null,
+  }) {
+    return _then(_value.copyWith(
+      visibilty: null == visibilty
+          ? _value.visibilty
+          : visibilty // ignore: cast_nullable_to_non_nullable
+              as bool,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFailed: null == isFailed
+          ? _value.isFailed
+          : isFailed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuccess: null == isSuccess
+          ? _value.isSuccess
+          : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Initial implements _Initial {
-  const _$_Initial();
-
-  @override
-  String toString() {
-    return 'LoginState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(bool visibilty, String password, String email) $default, {
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() failed,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(bool visibilty, String password, String email)?
-        $default, {
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? failed,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool visibilty, String password, String email)? $default, {
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? failed,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_LoginState value) $default, {
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failed value) failed,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_LoginState value)? $default, {
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Failed value)? failed,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_LoginState value)? $default, {
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements LoginState {
-  const factory _Initial() = _$_Initial;
-}
-
-/// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$_Loading>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Loading implements _Loading {
-  const _$_Loading();
-
-  @override
-  String toString() {
-    return 'LoginState.loading()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(bool visibilty, String password, String email) $default, {
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() failed,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(bool visibilty, String password, String email)?
-        $default, {
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? failed,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool visibilty, String password, String email)? $default, {
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? failed,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_LoginState value) $default, {
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failed value) failed,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_LoginState value)? $default, {
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Failed value)? failed,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_LoginState value)? $default, {
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements LoginState {
-  const factory _Loading() = _$_Loading;
-}
-
-/// @nodoc
-abstract class _$$_FailedCopyWith<$Res> {
-  factory _$$_FailedCopyWith(_$_Failed value, $Res Function(_$_Failed) then) =
-      __$$_FailedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_FailedCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$_Failed>
-    implements _$$_FailedCopyWith<$Res> {
-  __$$_FailedCopyWithImpl(_$_Failed _value, $Res Function(_$_Failed) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Failed implements _Failed {
-  const _$_Failed();
-
-  @override
-  String toString() {
-    return 'LoginState.failed()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Failed);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(bool visibilty, String password, String email) $default, {
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() failed,
-  }) {
-    return failed();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(bool visibilty, String password, String email)?
-        $default, {
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? failed,
-  }) {
-    return failed?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool visibilty, String password, String email)? $default, {
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_LoginState value) $default, {
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failed value) failed,
-  }) {
-    return failed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_LoginState value)? $default, {
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Failed value)? failed,
-  }) {
-    return failed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_LoginState value)? $default, {
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Failed implements LoginState {
-  const factory _Failed() = _$_Failed;
-}
-
-/// @nodoc
-abstract class _$$_LoginStateCopyWith<$Res> {
+abstract class _$$_LoginStateCopyWith<$Res>
+    implements $LoginStateCopyWith<$Res> {
   factory _$$_LoginStateCopyWith(
           _$_LoginState value, $Res Function(_$_LoginState) then) =
       __$$_LoginStateCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({bool visibilty, String password, String email});
+  $Res call(
+      {bool visibilty,
+      String password,
+      String email,
+      bool isLoading,
+      bool isFailed,
+      bool isSuccess});
 }
 
 /// @nodoc
@@ -1349,6 +1058,9 @@ class __$$_LoginStateCopyWithImpl<$Res>
     Object? visibilty = null,
     Object? password = null,
     Object? email = null,
+    Object? isLoading = null,
+    Object? isFailed = null,
+    Object? isSuccess = null,
   }) {
     return _then(_$_LoginState(
       visibilty: null == visibilty
@@ -1363,6 +1075,18 @@ class __$$_LoginStateCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFailed: null == isFailed
+          ? _value.isFailed
+          : isFailed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuccess: null == isSuccess
+          ? _value.isSuccess
+          : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1371,7 +1095,12 @@ class __$$_LoginStateCopyWithImpl<$Res>
 
 class _$_LoginState implements _LoginState {
   const _$_LoginState(
-      {this.visibilty = false, this.password = '', this.email = ''});
+      {this.visibilty = false,
+      this.password = '',
+      this.email = '',
+      this.isLoading = false,
+      this.isFailed = false,
+      this.isSuccess = false});
 
   @override
   @JsonKey()
@@ -1382,10 +1111,19 @@ class _$_LoginState implements _LoginState {
   @override
   @JsonKey()
   final String email;
+  @override
+  @JsonKey()
+  final bool isLoading;
+  @override
+  @JsonKey()
+  final bool isFailed;
+  @override
+  @JsonKey()
+  final bool isSuccess;
 
   @override
   String toString() {
-    return 'LoginState(visibilty: $visibilty, password: $password, email: $email)';
+    return 'LoginState(visibilty: $visibilty, password: $password, email: $email, isLoading: $isLoading, isFailed: $isFailed, isSuccess: $isSuccess)';
   }
 
   @override
@@ -1397,103 +1135,48 @@ class _$_LoginState implements _LoginState {
                 other.visibilty == visibilty) &&
             (identical(other.password, password) ||
                 other.password == password) &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isFailed, isFailed) ||
+                other.isFailed == isFailed) &&
+            (identical(other.isSuccess, isSuccess) ||
+                other.isSuccess == isSuccess));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, visibilty, password, email);
+  int get hashCode => Object.hash(
+      runtimeType, visibilty, password, email, isLoading, isFailed, isSuccess);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
       __$$_LoginStateCopyWithImpl<_$_LoginState>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(bool visibilty, String password, String email) $default, {
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() failed,
-  }) {
-    return $default(visibilty, password, email);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(bool visibilty, String password, String email)?
-        $default, {
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? failed,
-  }) {
-    return $default?.call(visibilty, password, email);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool visibilty, String password, String email)? $default, {
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? failed,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(visibilty, password, email);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_LoginState value) $default, {
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failed value) failed,
-  }) {
-    return $default(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_LoginState value)? $default, {
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Failed value)? failed,
-  }) {
-    return $default?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_LoginState value)? $default, {
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(this);
-    }
-    return orElse();
-  }
 }
 
 abstract class _LoginState implements LoginState {
   const factory _LoginState(
       {final bool visibilty,
       final String password,
-      final String email}) = _$_LoginState;
+      final String email,
+      final bool isLoading,
+      final bool isFailed,
+      final bool isSuccess}) = _$_LoginState;
 
+  @override
   bool get visibilty;
+  @override
   String get password;
+  @override
   String get email;
+  @override
+  bool get isLoading;
+  @override
+  bool get isFailed;
+  @override
+  bool get isSuccess;
+  @override
   @JsonKey(ignore: true)
   _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
       throw _privateConstructorUsedError;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jroscope/service/local/local.storage.service.dart';
 import 'package:jroscope/view/user/auth/login.auth.view.dart';
 import 'package:jroscope/view/user/auth/register.auth.view.dart';
 import 'package:jroscope/view/user/profile/interest/edit.interest.view.dart';
@@ -21,9 +22,9 @@ final GoRouter routeConfig = GoRouter(
               EditInterestView(),
         ),
       ],
-      redirect: (context, state) {
-        bool isLoggedIn = false;
-        if (isLoggedIn) {
+      redirect: (context, state) async {
+        final isLoggedIn = await LocalStorageService.instance.getIsLoggedIn();
+        if (isLoggedIn == 'true') {
           return null;
         } else {
           return '/auth';

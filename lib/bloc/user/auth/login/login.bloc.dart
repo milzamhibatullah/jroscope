@@ -1,61 +1,75 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:jroscope/service/user/user.service.dart';
 
 part 'login.event.dart';
+
 part 'login.state.dart';
+
 part 'login.bloc.freezed.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(const _Initial()) {
-    on<LoginEvent>((event, emit) {
-      event.when(
-        started: () => emit(const LoginState.initial()),
-        emailChange: (String inputEmail) {
-          state.maybeWhen(
-              (visibilty, password, email) => emit(
-                    LoginState(
-                      visibilty: visibilty,
-                      password: password,
-                      email: inputEmail,
-                    ),
-                  ),
-              orElse: () {});
-        },
-        passwordChange: (String inputPassword) {
-          state.maybeWhen(
-              (visibilty, password, email) => emit(
-                    LoginState(
-                      visibilty: visibilty,
-                      password: inputPassword,
-                      email: email,
-                    ),
-                  ),
-              orElse: () {});
-        },
-        passwordVisibility: () {
-          state.maybeWhen((visibilty, password, email) {
-            if (visibilty) {
-              emit(
-                LoginState(
-                  visibilty: false,
-                  password: password,
-                  email: email,
-                ),
-              );
-            } else {
-              emit(
-                LoginState(
-                  visibilty: true,
-                  password: password,
-                  email: email,
-                ),
-              );
-            }
-          }, orElse: () {});
-        },
-        logout: () {},
-        login: () {},
+  final userService = UserService();
+  LoginBloc() : super(const LoginState()) {
+    ///change visibility of password
+    on<_PasswordVisibility>((event, emit) {
+      emit(LoginState(
+          visibilty: state.visibilty ? false : true,
+          email: state.email,
+          password: state.password));
+    });
+
+    on<_EmailChange>((event, emit) {
+      emit(LoginState(
+          visibilty: state.visibilty,
+          email: event.email,
+          password: state.password));
+    });
+
+    on<_PasswordChange>((event, emit) {
+      emit(
+        LoginState(
+          visibilty: state.visibilty,
+          email: state.email,
+          password: event.password,
+        ),
       );
     });
+
+    on<_Login>((event, emit) async {
+      emit(
+        LoginState(
+          visibilty: state.visibilty,
+          email: state.email,
+          password: event.password,
+          isLoading: true,
+        ),
+      );
+
+      final success = await userService.login(state.email, state.password);
+      if (success) {
+        emit(LoginState(
+            email: '',
+            password: '',
+            visibilty: state.visibilty,
+            isLoading: false,
+            isSuccess: true));
+      } else {
+        emit(
+          LoginState(
+            visibilty: state.visibilty,
+            email: state.email,
+            password: event.password,
+            isLoading: false,
+          ),
+        );
+      }
+    });
+  }
+
+  @override
+  void onChange(Change<LoginState> change) {
+    print('state : $change');
+    super.onChange(change);
   }
 }

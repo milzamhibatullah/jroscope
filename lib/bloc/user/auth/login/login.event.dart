@@ -7,5 +7,5 @@ class LoginEvent with _$LoginEvent {
   const factory LoginEvent.passwordChange(String password) = _PasswordChange;
   const factory LoginEvent.passwordVisibility() = _PasswordVisibility;
   const factory LoginEvent.logout() = _Logout;
-  const factory LoginEvent.login() = _Login;
+  const factory LoginEvent.login(email, password) = _Login;
 }

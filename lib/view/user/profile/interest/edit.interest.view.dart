@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jroscope/config/app.images.config.dart';
 import 'package:jroscope/view/theme/style/custom.text.style.dart';
 import 'package:jroscope/view/theme/style/custom.textfield.style.dart';
@@ -22,7 +23,9 @@ class EditInterestView extends StatelessWidget {
             automaticallyImplyLeading: false,
             elevation: 0.0,
             centerTitle: false,
-            title: CustomBackButton(),
+            title: CustomBackButton(
+              callbak: () => context.pop(),
+            ),
             actions: [
               TextButton(
                 onPressed: () {},

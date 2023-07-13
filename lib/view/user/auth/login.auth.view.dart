@@ -74,7 +74,6 @@ class LoginAuthView extends StatelessWidget {
                           suffix: GoldOverlayWidget(
                             widget: IconButton(
                               onPressed: () {
-                                print('clicked');
                                 context
                                     .read<LoginBloc>()
                                     .add(const LoginEvent.passwordVisibility());
@@ -98,7 +97,6 @@ class LoginAuthView extends StatelessWidget {
                         onTap: () {
                           if (state.email.isNotEmpty &&
                               state.password.isNotEmpty) {
-                            print('enter here');
                             context.read<LoginBloc>().add(
                                 LoginEvent.login(state.email, state.password));
                           } else {
@@ -109,15 +107,13 @@ class LoginAuthView extends StatelessWidget {
                           }
                         },
                         child: AuthSharedButton(
-                          changedState: state.email.isNotEmpty &&
-                                  state.password.isNotEmpty
-                              ? true
-                              : false,
+                          changedState: _inputIsValidated(state),
                           child: Center(
                             child: Text(
                               'Login',
                               style: customTextStyle(
-                                  color: Colors.white.withOpacity(.5),
+                                  color: Colors.white.withOpacity(
+                                      _inputIsValidated(state) ? 1 : .5),
                                   weight: FontWeight.w700),
                             ),
                           ),
@@ -177,5 +173,13 @@ class LoginAuthView extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  bool _inputIsValidated(LoginState state) {
+    if (state.email.isNotEmpty && state.password.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

@@ -11,6 +11,20 @@ part 'register.bloc.freezed.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final _service = UserService();
   RegisterBloc() : super(const _RegisterState()) {
+    on<_Started>((event, emit) {
+      print('initialzed');
+      return emit(
+        state.copyWith(
+          confirmPassword: '',
+          password: '',
+          email: '',
+          username: '',
+          passwordSecured: true,
+          confirmPasswordSecured: true,
+        ),
+      );
+    });
+
     ///event change email
     on<_EmailChange>(
       (event, emit) => emit(

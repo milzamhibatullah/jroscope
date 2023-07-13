@@ -24,217 +24,225 @@ class RegisterAuthView extends StatelessWidget {
         ),
         BlocBuilder<RegisterBloc, RegisterState>(
           builder: (context, state) {
-            return Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                automaticallyImplyLeading: false,
-                elevation: 0.0,
-                centerTitle: false,
-                title: CustomBackButton(),
-              ),
-              body: SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ///login title
-                      Padding(
-                        padding: EdgeInsets.only(left: 41.r, top: 24.r),
-                        child: Text(
-                          'Register',
-                          style: customTextStyle(
-                              size: 24.0,
-                              weight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 24.r,
-                      ),
-                      //create email
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 24.r),
-                        child: TextField(
-                          onChanged: (value) =>
-                              context.read<RegisterBloc>().add(
-                                    RegisterEvent.emailChange(value),
-                                  ),
-                          style: customTextStyle(color: Colors.white),
-                          decoration:
-                              customTextFieldStyle(hintText: 'Enter Email'),
-                        ),
-                      ),
-                      //create username
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 24.r, vertical: 8.r),
-                        child: TextField(
-                          style: customTextStyle(color: Colors.white),
-                          onChanged: (value) =>
-                              context.read<RegisterBloc>().add(
-                                    RegisterEvent.userNameChange(value),
-                                  ),
-                          decoration:
-                              customTextFieldStyle(hintText: 'Create Username'),
-                        ),
-                      ),
-
-                      ///password textfield
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 24.r),
-                        child: TextField(
-                          obscureText: state.passwordSecured,
-                          style: customTextStyle(color: Colors.white),
-                          onChanged: (value) =>
-                              context.read<RegisterBloc>().add(
-                                    RegisterEvent.passwordChange(value),
-                                  ),
-                          decoration: customTextFieldStyle(
-                            hintText: 'Create Password',
-                            suffix: GoldOverlayWidget(
-                              widget: IconButton(
-                                onPressed: () {
+            return WillPopScope(
+                child: Scaffold(
+                  backgroundColor: Colors.transparent,
+                  appBar: AppBar(
+                    backgroundColor: Colors.transparent,
+                    automaticallyImplyLeading: false,
+                    elevation: 0.0,
+                    centerTitle: false,
+                    title: CustomBackButton(
+                      callbak: () {
+                        context.pop();
+                      },
+                    ),
+                  ),
+                  body: SafeArea(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ///login title
+                          Padding(
+                            padding: EdgeInsets.only(left: 41.r, top: 24.r),
+                            child: Text(
+                              'Register',
+                              style: customTextStyle(
+                                  size: 24.0,
+                                  weight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 24.r,
+                          ),
+                          //create email
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 24.r),
+                            child: TextFormField(
+                              onChanged: (value) =>
                                   context.read<RegisterBloc>().add(
-                                      const RegisterEvent.passwordSecured());
-                                },
-                                icon: Icon(
-                                  state.passwordSecured
-                                      ? Icons.visibility_off_outlined
-                                      : Icons.visibility_rounded,
-                                  color: Colors.white,
+                                        RegisterEvent.emailChange(value),
+                                      ),
+                              style: customTextStyle(color: Colors.white),
+                              decoration:
+                                  customTextFieldStyle(hintText: 'Enter Email'),
+                            ),
+                          ),
+                          //create username
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 24.r, vertical: 8.r),
+                            child: TextFormField(
+                              style: customTextStyle(color: Colors.white),
+                              onChanged: (value) =>
+                                  context.read<RegisterBloc>().add(
+                                        RegisterEvent.userNameChange(value),
+                                      ),
+                              decoration: customTextFieldStyle(
+                                  hintText: 'Create Username'),
+                            ),
+                          ),
+
+                          ///password textfield
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 24.r),
+                            child: TextFormField(
+                              obscureText: state.passwordSecured,
+                              style: customTextStyle(color: Colors.white),
+                              onChanged: (value) =>
+                                  context.read<RegisterBloc>().add(
+                                        RegisterEvent.passwordChange(value),
+                                      ),
+                              decoration: customTextFieldStyle(
+                                hintText: 'Create Password',
+                                suffix: GoldOverlayWidget(
+                                  widget: IconButton(
+                                    onPressed: () {
+                                      context.read<RegisterBloc>().add(
+                                          const RegisterEvent
+                                              .passwordSecured());
+                                    },
+                                    icon: Icon(
+                                      state.passwordSecured
+                                          ? Icons.visibility_off_outlined
+                                          : Icons.visibility_rounded,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
 
-                      ///create confirmation password
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 24.r, vertical: 8.r),
-                        child: TextField(
-                          obscureText: state.confirmPasswordSecured,
-                          style: customTextStyle(color: Colors.white),
-                          onChanged: (value) =>
-                              context.read<RegisterBloc>().add(
+                          ///create confirmation password
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 24.r, vertical: 8.r),
+                            child: TextFormField(
+                              obscureText: state.confirmPasswordSecured,
+                              style: customTextStyle(color: Colors.white),
+                              onChanged: (value) => context
+                                  .read<RegisterBloc>()
+                                  .add(
                                     RegisterEvent.confirmPasswordChange(value),
                                   ),
-                          decoration: customTextFieldStyle(
-                            hintText: 'Confirm Password',
-                            suffix: GoldOverlayWidget(
-                              widget: IconButton(
-                                onPressed: () {
-                                  context.read<RegisterBloc>().add(
-                                      const RegisterEvent
-                                          .confirmPasswordSecure());
+                              decoration: customTextFieldStyle(
+                                hintText: 'Confirm Password',
+                                suffix: GoldOverlayWidget(
+                                  widget: IconButton(
+                                    onPressed: () {
+                                      context.read<RegisterBloc>().add(
+                                          const RegisterEvent
+                                              .confirmPasswordSecure());
 
-                                  if (state.isSuccess) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      snackBarWidget(
-                                          'Successfully register, login now!',
-                                          3),
-                                    );
-                                  }
-                                },
-                                icon: Icon(
-                                  state.confirmPasswordSecured
-                                      ? Icons.visibility_off_outlined
-                                      : Icons.visibility_rounded,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      ///register button
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 24.r, vertical: 16.r),
-                        child: GestureDetector(
-                          onTap: () {
-                            if (state.email.isNotEmpty &&
-                                state.username.isNotEmpty &&
-                                state.password.isNotEmpty &&
-                                state.confirmPassword.isNotEmpty &&
-                                (state.password == state.confirmPassword)) {
-                              context
-                                  .read<RegisterBloc>()
-                                  .add(const RegisterEvent.register());
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                snackBarWidget(
-                                    'Make sure input field is not empty and password should be match',
-                                    2),
-                              );
-                            }
-                          },
-                          child: AuthSharedButton(
-                            changedState: state.email.isNotEmpty &&
-                                    state.username.isNotEmpty &&
-                                    state.password.isNotEmpty &&
-                                    state.confirmPassword.isNotEmpty &&
-                                    (state.password == state.confirmPassword)
-                                ? true
-                                : false,
-                            child: Center(
-                              child: Text(
-                                'Register',
-                                style: customTextStyle(
-                                    color: Colors.white,
-                                    weight: FontWeight.w700),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      /// login
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 24.r,
-                          vertical: 16.r,
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Have an Account? ',
-                              style: customTextStyle(color: Colors.white),
-                            ),
-                            GoldOverlayWidget(
-                              widget: TextButton(
-                                onPressed: () {
-                                  context.pop();
-                                },
-                                child: Text(
-                                  'Login here',
-                                  style: customTextStyle(
+                                      if (state.isSuccess) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          snackBarWidget(
+                                              'Successfully register, login now!',
+                                              3),
+                                        );
+                                      }
+                                    },
+                                    icon: Icon(
+                                      state.confirmPasswordSecured
+                                          ? Icons.visibility_off_outlined
+                                          : Icons.visibility_rounded,
                                       color: Colors.white,
-                                      decoration: TextDecoration.underline),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      state.isLoading
-                          ? const Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
+                          ),
+
+                          ///register button
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 24.r, vertical: 16.r),
+                            child: GestureDetector(
+                              onTap: () {
+                                if (_inputIsValidated(state)) {
+                                  print(state.confirmPassword);
+                                  print(state.password);
+                                  // context
+                                  //     .read<RegisterBloc>()
+                                  //     .add(const RegisterEvent.register());
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    snackBarWidget(
+                                        'Make sure input field is not empty and password should be match',
+                                        2),
+                                  );
+                                }
+                              },
+                              child: AuthSharedButton(
+                                changedState: _inputIsValidated(state),
+                                child: Center(
+                                  child: Text(
+                                    'Register',
+                                    style: customTextStyle(
+                                        color: Colors.white.withOpacity(
+                                            _inputIsValidated(state) ? 1 : .5),
+                                        weight: FontWeight.w700),
+                                  ),
+                                ),
                               ),
-                            )
-                          : const SizedBox.shrink(),
-                    ],
+                            ),
+                          ),
+
+                          /// login
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 24.r,
+                              vertical: 16.r,
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Have an Account? ',
+                                  style: customTextStyle(color: Colors.white),
+                                ),
+                                GoldOverlayWidget(
+                                  widget: TextButton(
+                                    onPressed: () {
+                                      context.pop();
+                                    },
+                                    child: Text(
+                                      'Login here',
+                                      style: customTextStyle(
+                                          color: Colors.white,
+                                          decoration: TextDecoration.underline),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          state.isLoading
+                              ? const Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            );
+                onWillPop: () async {
+                  ///set to initial if screen is popped
+                  context
+                      .read<RegisterBloc>()
+                      .add(const RegisterEvent.started());
+                  return true;
+                });
           },
           buildWhen: (previous, current) {
             if (current.isSuccess) {
@@ -248,5 +256,17 @@ class RegisterAuthView extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  bool _inputIsValidated(state) {
+    if (state.email.isNotEmpty &&
+        state.username.isNotEmpty &&
+        state.password.isNotEmpty &&
+        state.confirmPassword.isNotEmpty &&
+        (state.password == state.confirmPassword)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
